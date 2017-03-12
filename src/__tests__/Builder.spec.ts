@@ -4,7 +4,7 @@ import mock from "../Builder";
 
 const noop = (res: any) => res;
 
-describe("xhr-mock", () => {
+describe("Builder", () => {
   it("should setup and teardown the mock XMLHttpRequest class", () => {
     const xhr = (window as any).XMLHttpRequest;
     mock.setup();

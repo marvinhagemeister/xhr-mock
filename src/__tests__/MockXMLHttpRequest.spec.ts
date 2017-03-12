@@ -90,7 +90,7 @@ describe("MockXMLHttpRequest", () => {
       xhr.ontimeout = () => {
         end = Date.now();
         t.isTrue(end - start >= 100);
-        t.isTrue(xhr.readyState === MockXMLHttpRequest.DONE);
+        t.equal(xhr.readyState, MockXMLHttpRequest.DONE);
         done();
       };
       start = Date.now();
@@ -101,9 +101,7 @@ describe("MockXMLHttpRequest", () => {
       let aborted = false;
       let timedout = false;
 
-      MockXMLHttpRequest.addHandler((req, res) => {
-        return res.timeout(10);
-      });
+      MockXMLHttpRequest.addHandler((req, res) => res.timeout(10));
 
       const xhr = new MockXMLHttpRequest();
       xhr.open("/");
@@ -141,8 +139,7 @@ describe("MockXMLHttpRequest", () => {
       MockXMLHttpRequest.addHandler((req, res) => {
         return res
           .header("Content-Type", "application/json")
-          .header("X-Powered-By", "SecretSauce")
-          ;
+          .header("X-Powered-By", "SecretSauce");
       });
 
       const xhr = new MockXMLHttpRequest();
@@ -182,7 +179,6 @@ describe("MockXMLHttpRequest", () => {
       xhr.open("/");
       xhr.send();
       xhr.abort();
-
     });
 
     it("should allow registering progress event listener", done => {
